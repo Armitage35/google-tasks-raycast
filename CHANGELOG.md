@@ -1,5 +1,9 @@
 # Google Tasks Changelog
 
+## [Add Project Plan] - {PR_MERGE_DATE}
+
+- Added PLAN.md with full architecture, UI mockups, implementation details, and testing plan
+
 ## [Initial Version] - {PR_MERGE_DATE}
 
 - View all Google Task lists
