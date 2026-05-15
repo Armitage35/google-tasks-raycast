@@ -1,5 +1,14 @@
 # Google Tasks Changelog
 
+## [Improve Onboarding] - {PR_MERGE_DATE}
+
+- Rewrote README with step-by-step OAuth setup including consent screen and test user configuration
+- Added troubleshooting table for common setup errors
+- Added first-launch guidance (what to expect after entering the Client ID)
+- Fixed README title to match extension name (Google Tasks Manager)
+- Added metadata/ folder for Raycast Store screenshots
+- Improved preference description to reference README
+
 ## [Add Project Plan and Fix Plan Gaps] - {PR_MERGE_DATE}
 
 - Added PLAN.md with full architecture, UI mockups, implementation details, and testing plan

@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
 type ExtensionPreferences = {
-  /** OAuth Client ID - Your Google OAuth client ID. Create one at https://console.developers.google.com/apis/credentials (iOS app type, Bundle ID: com.raycast) */
+  /** OAuth Client ID - Your Google OAuth client ID (see README for setup). Create at console.cloud.google.com > Credentials > OAuth client ID (iOS type, Bundle ID: com.raycast) */
   "clientId": string
 }
 
