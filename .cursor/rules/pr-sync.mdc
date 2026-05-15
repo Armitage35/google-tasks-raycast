@@ -1,0 +1,51 @@
+---
+description: How to push local changes to the raycast/extensions PR branch via GitHub API
+alwaysApply: false
+---
+
+# Syncing Changes to the raycast/extensions PR
+
+The PR lives at `raycast/extensions` from fork `Armitage35/raycast-extensions` branch `ext/google-tasks-manager`. The repo is too large to clone, so use the GitHub API to push changes.
+
+## Steps
+
+1. **Get current HEAD SHA** of the PR branch:
+```bash
+HEAD_SHA=$(gh api repos/Armitage35/raycast-extensions/git/ref/heads/ext/google-tasks-manager --jq '.object.sha')
+```
+
+2. **Get the tree SHA** from that commit:
+```bash
+TREE_SHA=$(gh api repos/Armitage35/raycast-extensions/git/commits/$HEAD_SHA --jq '.tree.sha')
+```
+
+3. **Create blobs** for each changed file (from the local repo root):
+```bash
+BLOB=$(gh api repos/Armitage35/raycast-extensions/git/blobs \
+  -f content="$(base64 < path/to/file)" -f encoding=base64 --jq '.sha')
+```
+
+4. **Create a new tree** with all updated files (paths prefixed with `extensions/google-tasks-manager/`):
+```bash
+NEW_TREE=$(gh api repos/Armitage35/raycast-extensions/git/trees --method POST \
+  -f base_tree=$TREE_SHA \
+  -f 'tree[][path]=extensions/google-tasks-manager/src/file.ts' \
+  -f 'tree[][mode]=100644' -f 'tree[][type]=blob' -f 'tree[][sha]=$BLOB' \
+  --jq '.sha')
+```
+
+5. **Create a commit**:
+```bash
+NEW_COMMIT=$(gh api repos/Armitage35/raycast-extensions/git/commits --method POST \
+  -f message='commit message' \
+  -f tree=$NEW_TREE \
+  -f "parents[]=$HEAD_SHA" --jq '.sha')
+```
+
+6. **Update the branch ref**:
+```bash
+gh api repos/Armitage35/raycast-extensions/git/refs/heads/ext/google-tasks-manager \
+  --method PATCH -f sha=$NEW_COMMIT
+```
+
+All files in the PR live under `extensions/google-tasks-manager/` — mirror the local repo structure with that prefix.
