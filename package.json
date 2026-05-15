@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "google-tasks",
-  "title": "Google Tasks",
-  "description": "View, create, and complete Google Tasks from Raycast.",
+  "name": "google-tasks-manager",
+  "title": "Google Tasks Manager",
+  "description": "A fast, lightweight way to manage your Google Tasks from Raycast.",
   "icon": "google-tasks.png",
   "author": "adrien",
   "categories": ["Productivity"],
