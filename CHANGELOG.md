@@ -1,5 +1,13 @@
 # Google Tasks Changelog
 
+## [Address PR Review Feedback] - {PR_MERGE_DATE}
+
+- Fixed bug where clearing task notes on edit was silently ignored (empty string was dropped from PATCH body)
+- Use auto-generated `Preferences` type instead of manual inline type annotation in `oauth.ts`
+- Remove hardcoded `"en-US"` locale from date formatting
+- Switch ESLint config to use `defineConfig` from `eslint/config`
+- Regenerate `package-lock.json` to remove stale `node-fetch` dependency
+
 ## [Improve Onboarding] - {PR_MERGE_DATE}
 
 - Rewrote README with step-by-step OAuth setup including consent screen and test user configuration

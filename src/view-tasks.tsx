@@ -43,7 +43,7 @@ function getTaskSubtitle(task: Task): string {
   }
   if (task.due) {
     const date = new Date(task.due);
-    return `Due: ${date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`;
+    return `Due: ${date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}`;
   }
   return "";
 }
