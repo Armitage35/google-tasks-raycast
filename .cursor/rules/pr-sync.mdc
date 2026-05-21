@@ -25,6 +25,13 @@ BLOB=$(gh api repos/Armitage35/raycast-extensions/git/blobs \
   -f content="$(base64 < path/to/file)" -f encoding=base64 --jq '.sha')
 ```
 
+> **CHANGELOG.md special case**: the local file uses real dates (e.g. `2026-05-21`) for readability. The PR branch needs `{PR_MERGE_DATE}` so Raycast's merge automation can replace them. Substitute before base64-encoding:
+> ```bash
+> BLOB_CHANGELOG=$(gh api repos/Armitage35/raycast-extensions/git/blobs \
+>   -f content="$(sed 's/ - [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/ - {PR_MERGE_DATE}/g' CHANGELOG.md | base64)" \
+>   -f encoding=base64 --jq '.sha')
+> ```
+
 4. **Create a new tree** with all updated files (paths prefixed with `extensions/google-tasks-manager/`):
 ```bash
 NEW_TREE=$(gh api repos/Armitage35/raycast-extensions/git/trees --method POST \
