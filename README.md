@@ -7,6 +7,7 @@ View, create, and manage your Google Tasks directly from Raycast.
 - Browse all your task lists and tasks
 - Filter tasks by status: Open, Completed, or All
 - Create tasks with title, notes, and due date
+- Natural language due dates in 6 languages: English, French, German, Spanish, Portuguese, Italian
 - Complete and reopen tasks with a single keystroke
 - Edit task details inline
 - Delete tasks
@@ -65,7 +66,22 @@ Browse your task lists, then drill into any list to see its tasks. Use the dropd
 
 ### Create Task
 
-A standalone form to quickly create a task from anywhere in Raycast. Pick a title, add optional notes and a due date, then choose which task list it belongs to.
+A standalone form to quickly create a task from anywhere in Raycast. Type a title, add optional notes, set a due date using natural language, then choose which task list it belongs to.
+
+## Date Expressions
+
+The Due Date field accepts plain text. As you type, a live preview confirms the recognized date. Supported in 6 languages:
+
+| Language | Today | Tomorrow | In 3 days | Next Monday | Absolute date |
+|----------|-------|----------|-----------|-------------|---------------|
+| **English** | `today` | `tomorrow` | `in 3 days` | `next monday` | `jan 15` |
+| **French** | `aujourd'hui` | `demain` | `dans 3 jours` | `lundi prochain` | `15 janvier` |
+| **German** | `heute` | `morgen` | `in 3 Tagen` | `nächsten Montag` | `15 Januar` |
+| **Spanish** | `hoy` | `mañana` | `en 3 días` | `el lunes` | `15 enero` |
+| **Portuguese** | `hoje` | `amanhã` | — | `segunda-feira` | `15 janeiro` |
+| **Italian** | `oggi` | `domani` | `in 3 giorni` | `prossimo lunedì` | `15 gennaio` |
+
+Leave the field blank to create a task with no due date.
 
 ## Troubleshooting
 

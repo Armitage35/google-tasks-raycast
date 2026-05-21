@@ -141,6 +141,10 @@ A Raycast `List` showing tasks within the chosen list, with a filter dropdown.
 
 ### Screen 4: Create Task Form (standalone command or via ⌘N)
 
+The Due Date field accepts natural language input in English and French. It has three visual states:
+
+**State 1 — Empty (field untouched)**
+
 ```
 ┌─────────────────────────────────────────────────┐
 │  Create Task                                    │
@@ -153,13 +157,12 @@ A Raycast `List` showing tasks within the chosen list, with a filter dropdown.
 │                                                 │
 │  Notes                                          │
 │  ┌───────────────────────────────────────────┐  │
-│  │ Draft the introduction and outline key    │  │
-│  │ points for the Q2 review                  │  │
+│  │ Draft the introduction and outline...     │  │
 │  └───────────────────────────────────────────┘  │
 │                                                 │
 │  Due Date                                       │
 │  ┌───────────────────────────────────────────┐  │
-│  │ 📅  May 22, 2026                          │  │
+│  │  e.g. "tomorrow", "next monday", "demain" │  │  ← placeholder
 │  └───────────────────────────────────────────┘  │
 │                                                 │
 │  Task List                                      │
@@ -172,11 +175,32 @@ A Raycast `List` showing tasks within the chosen list, with a filter dropdown.
 └─────────────────────────────────────────────────┘
 ```
 
+**State 2 — Recognized (date parsed successfully)**
+
+```
+│  Due Date                                       │
+│  ┌───────────────────────────────────────────┐  │
+│  │ next monday                               │  │  ← user typed
+│  └───────────────────────────────────────────┘  │
+│  Recognized: Monday, May 25, 2026               │  ← Form.Description
+```
+
+**State 3 — Unrecognized (input cannot be parsed)**
+
+```
+│  Due Date                                       │
+│  ┌───────────────────────────────────────────┐  │
+│  │ foobar                                    │  │  ← user typed
+│  └───────────────────────────────────────────┘  │
+│  Date not recognized                            │  ← error prop (red)
+```
+
 - **Title**: `Form.TextField` (required)
 - **Notes**: `Form.TextArea` (optional)
-- **Due Date**: `Form.DatePicker` (optional)
+- **Due Date**: `Form.TextField` with natural language parsing via `chrono-node` (EN + FR); live feedback via `error` prop and `Form.Description`
 - **Task List**: `Form.Dropdown` populated from `fetchTaskLists()`
 - On submit: `POST /tasks/v1/lists/{listId}/tasks`, then success toast + `popToRoot()`
+- Edit Task pre-populates the field with the existing due date as readable text so the recognized state appears immediately on open
 
 ### Toast Notifications
 
