@@ -141,7 +141,7 @@ A Raycast `List` showing tasks within the chosen list, with a filter dropdown.
 
 ### Screen 4: Create Task Form (standalone command or via ⌘N)
 
-The Due Date field accepts natural language input in English and French. It has three visual states:
+The Due Date field accepts natural language input in 6 languages (English, French, German, Spanish, Portuguese, Italian). It has three visual states:
 
 **State 1 — Empty (field untouched)**
 
@@ -197,7 +197,7 @@ The Due Date field accepts natural language input in English and French. It has 
 
 - **Title**: `Form.TextField` (required)
 - **Notes**: `Form.TextArea` (optional)
-- **Due Date**: `Form.TextField` with natural language parsing via `chrono-node` (EN + FR); live feedback via `error` prop and `Form.Description`
+- **Due Date**: `Form.TextField` with natural language parsing via `chrono-node` (EN, FR, DE, ES, PT, IT); live feedback via `error` prop and `Form.Description`
 - **Task List**: `Form.Dropdown` populated from `fetchTaskLists()`
 - On submit: `POST /tasks/v1/lists/{listId}/tasks`, then success toast + `popToRoot()`
 - Edit Task pre-populates the field with the existing due date as readable text so the recognized state appears immediately on open
@@ -272,7 +272,7 @@ Uses `getAccessToken()` from `@raycast/utils` to get the current token. All func
   "dependencies": {
     "@raycast/api": "^1.103.4",
     "@raycast/utils": "^2.2.1",
-    "node-fetch": "^3.3.2"
+    "chrono-node": "^2.9.1"
   }
 }
 ```
@@ -384,7 +384,7 @@ The [existing extension](https://github.com/raycast/extensions/tree/main/extensi
 | **Complete task UX** | Toggle is a secondary action in the action panel | Toggle is the **primary action** (Enter key) |
 | **Error handling** | On API error, `setState({ tasks: [] })` wipes the displayed list | Errors show toast, previous task list is preserved |
 | **Edit form validation** | No validation (can submit empty title) | `useForm` with `FormValidation.Required` on title |
-| **Due date on edit** | Raw string instead of Date, no DatePicker | Proper `Form.DatePicker` with date serialization |
+| **Due date on edit** | Raw string instead of Date, no DatePicker | Natural language text field pre-populated with readable date, backed by `chrono-node` |
 | **File structure** | 9 files across `api/`, `components/` subdirs | 5 files, flat `src/` |
 
 ## Testing Plan
