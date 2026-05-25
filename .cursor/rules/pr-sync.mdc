@@ -7,7 +7,12 @@ alwaysApply: false
 
 The PR lives at `raycast/extensions` from fork `Armitage35/raycast-extensions` branch `ext/google-tasks-manager`. The repo is too large to clone, so use the GitHub API to push changes.
 
-> **Account note**: `GITHUB_TOKEN` is set to `adrien_perion` which owns neither repo. All `gh api` calls here work because the Armitage35 keyring token is used automatically when `GITHUB_TOKEN` is unset. If calls fail with 403, prefix with `GITHUB_TOKEN=""` to force keyring auth.
+> **Account note**: `GITHUB_TOKEN` env var is set to `adrien_perion`, which has no write access to either repo. Always obtain the Armitage35 token explicitly and pass it for every `gh api` call:
+> ```bash
+> ARM_TOKEN=$(GITHUB_TOKEN="" gh auth token --user Armitage35)
+> # then use: GITHUB_TOKEN=$ARM_TOKEN gh api ...
+> ```
+> Read-only calls (GET) may work without this, but all write calls (POST/PATCH) require it.
 
 ## Steps
 
