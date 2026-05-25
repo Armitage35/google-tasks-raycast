@@ -7,6 +7,8 @@ alwaysApply: false
 
 The PR lives at `raycast/extensions` from fork `Armitage35/raycast-extensions` branch `ext/google-tasks-manager`. The repo is too large to clone, so use the GitHub API to push changes.
 
+> **Account note**: `GITHUB_TOKEN` is set to `adrien_perion` which owns neither repo. All `gh api` calls here work because the Armitage35 keyring token is used automatically when `GITHUB_TOKEN` is unset. If calls fail with 403, prefix with `GITHUB_TOKEN=""` to force keyring auth.
+
 ## Steps
 
 1. **Get current HEAD SHA** of the PR branch:

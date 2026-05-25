@@ -13,6 +13,16 @@ This is a **Raycast extension** built with `@raycast/api` and `@raycast/utils`. 
 - Authentication is handled by `withAccessToken(google)` wrapping command exports. Never manage tokens manually.
 - Commands are declared in `package.json` under `commands[]` and resolved by convention from `src/<name>.tsx`.
 
+## GitHub Account
+
+This repo (`Armitage35/google-tasks-raycast`) belongs to the **Armitage35** GitHub account. The `GITHUB_TOKEN` env var is set to a different account (`adrien_perion`) which has no push access here. Always push using the Armitage35 token:
+
+```bash
+git push "https://Armitage35:$(GITHUB_TOKEN="" gh auth token --user Armitage35)@github.com/Armitage35/google-tasks-raycast.git" main
+```
+
+Never use plain `git push origin main` — it will fail with 403.
+
 ## After Every Change
 
 1. Run `npm run lint` and fix any errors before finishing.
